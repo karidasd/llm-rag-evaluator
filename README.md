@@ -12,14 +12,23 @@ Stop guessing which model performs best for your specific use-case. Compare them
 
 ---
 
-## ✨ Key Features
+## ✨ Key Features (v2.0)
 - 🚀 **Blazing Fast Inference:** Powered by the [Groq API](https://groq.com/), enabling you to evaluate open-source models like `Llama 3` and `Mixtral` in milliseconds.
-- 🔒 **Privacy-First (Local Embeddings):** Uses local HuggingFace embedding models (`all-MiniLM-L6-v2`) by default. Your private knowledge base never leaves your machine during the embedding process.
+- 📄 **PDF & Document Support:** Drag and drop PDF files directly into the UI to be chunked and indexed automatically!
+- 💾 **ChromaDB Persistent Storage:** Your vector embeddings are now saved locally using `ChromaDB`, meaning you don't have to re-upload data on every run.
+- 🌐 **Agentic Web Search Fallback:** If the provided documents don't contain the answer, the pipeline automatically searches the live internet (via DuckDuckGo) to find the answer!
+- 🔒 **Privacy-First (Local Embeddings):** Uses local HuggingFace embedding models (`all-MiniLM-L6-v2`) by default.
 - 📐 **Ragas Evaluation:** Built-in integration with the [Ragas Framework](https://docs.ragas.io/) to objectively score:
   - **Faithfulness:** Measures if the answer is completely derived from the given context (no hallucinations).
   - **Answer Relevancy:** Measures how directly the answer addresses the user's prompt.
-- 🧩 **Modular Architecture:** Built on top of [Haystack 2.x](https://haystack.deepset.ai/), making it trivial to swap out Vector Stores (e.g., ChromaDB, Qdrant, Milvus) and embedding models.
-- 📊 **Beautiful Web UI:** Interactive frontend built with [Streamlit](https://streamlit.io/) featuring real-time data visualization via Plotly.
+- 📥 **CSV Reporting:** Export your evaluation results (Ragas scores) instantly to a CSV file.
+- 📊 **Beautiful Web UI:** Interactive frontend built with [Streamlit](https://streamlit.io/) featuring real-time data visualization.
+
+---
+
+## 🎥 Live Demo / Screenshots
+*(Add your GIF or screenshot here)*
+To test the tool quickly, you can use the provided `demo/sample.pdf` file!
 
 ---
 
