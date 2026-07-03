@@ -1,64 +1,95 @@
 # 🦑 RAGEval: AI Data Pipeline Evaluator
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
-![Haystack](https://img.shields.io/badge/Haystack-2.x-orange)
-![Streamlit](https://img.shields.io/badge/Streamlit-UI-red)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Haystack 2.x](https://img.shields.io/badge/Haystack-2.x-orange.svg)](https://haystack.deepset.ai/)
+[![Ragas](https://img.shields.io/badge/Evaluation-Ragas-green.svg)](https://docs.ragas.io/)
+[![Groq](https://img.shields.io/badge/Inference-Groq-black.svg)](https://groq.com/)
 
-Το **RAGEval** είναι ένα open-source εργαλείο (DevTool) γραμμένο σε Python, σχεδιασμένο για Data Scientists και Developers. Σας επιτρέπει να αξιολογείτε και να συγκρίνετε διαφορετικά Large Language Models (LLMs) και στρατηγικές RAG (Retrieval-Augmented Generation) πάνω στα δικά σας δεδομένα.
+**RAGEval** is an open-source Developer Tool built for Data Scientists and AI Engineers. It allows you to rapidly build, evaluate, and compare different Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) strategies directly on your own custom data.
 
-## ✨ Χαρακτηριστικά
-- 🚀 **Αστραπιαία Inference:** Χρήση του [Groq](https://groq.com/) API για κλήση μοντέλων όπως το Llama 3 και το Mixtral σε κλάσματα δευτερολέπτου.
-- 🔒 **Privacy-First (Τοπικά Embeddings):** Χρησιμοποιεί τοπικά μοντέλα από το HuggingFace (`all-MiniLM-L6-v2`) για τα embeddings, διασφαλίζοντας ότι τα δεδομένα σας (έγγραφα) παραμένουν στον υπολογιστή σας χωρίς περιττά κόστη API.
-- 📐 **Αξιολόγηση με Ragas:** Ενσωματωμένο το [Ragas Framework](https://docs.ragas.io/) για να μετράει το `Faithfulness` (απουσία παραισθήσεων) και το `Answer Relevancy` (κατά πόσο απάντησε σωστά στην ερώτηση).
-- 🧩 **Modular Αρχιτεκτονική:** Χτισμένο πάνω στο [Haystack 2.x](https://haystack.deepset.ai/) για εύκολη προσθήκη διαφορετικών Vector Databases στο μέλλον.
-- 📊 **Beautiful Web UI:** Γραφικό περιβάλλον με [Streamlit](https://streamlit.io/) και διαδραστικά γραφήματα Plotly.
+Stop guessing which model performs best for your specific use-case. Compare them objectively with **Ragas** metrics!
 
-## 🛠️ Τεχνολογίες (Tech Stack)
-*   **Orchestration:** Haystack AI
-*   **LLM Provider:** Groq
-*   **Evaluation:** Ragas, LangChain
-*   **UI / Visualization:** Streamlit, Plotly, Pandas
-*   **Embeddings:** Sentence-Transformers (HuggingFace)
+---
 
-## 🚀 Εγκατάσταση και Χρήση
+## ✨ Key Features
+- 🚀 **Blazing Fast Inference:** Powered by the [Groq API](https://groq.com/), enabling you to evaluate open-source models like `Llama 3` and `Mixtral` in milliseconds.
+- 🔒 **Privacy-First (Local Embeddings):** Uses local HuggingFace embedding models (`all-MiniLM-L6-v2`) by default. Your private knowledge base never leaves your machine during the embedding process.
+- 📐 **Ragas Evaluation:** Built-in integration with the [Ragas Framework](https://docs.ragas.io/) to objectively score:
+  - **Faithfulness:** Measures if the answer is completely derived from the given context (no hallucinations).
+  - **Answer Relevancy:** Measures how directly the answer addresses the user's prompt.
+- 🧩 **Modular Architecture:** Built on top of [Haystack 2.x](https://haystack.deepset.ai/), making it trivial to swap out Vector Stores (e.g., ChromaDB, Qdrant, Milvus) and embedding models.
+- 📊 **Beautiful Web UI:** Interactive frontend built with [Streamlit](https://streamlit.io/) featuring real-time data visualization via Plotly.
 
-### 1. Κλωνοποίηση του Repository
-```bash
-git clone https://github.com/your-username/rageval.git
-cd rageval
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    A[User Input / Data] -->|Chunking| B[Local Embeddings]
+    B --> C[(Vector Database)]
+    D[User Question] --> E[Retriever]
+    C --> E
+    E --> F[Prompt Builder]
+    F --> G1[LLM A - Groq]
+    F --> G2[LLM B - Groq]
+    G1 --> H[Ragas Evaluator]
+    G2 --> H
+    H --> I[Streamlit Dashboard]
 ```
 
-### 2. Εγκατάσταση Εξαρτήσεων (Dependencies)
-Προτείνεται η χρήση ενός εικονικού περιβάλλοντος (virtual environment):
+---
+
+## 🚀 Installation & Quick Start
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/karidasd/llm-rag-evaluator.git
+cd llm-rag-evaluator
+```
+
+### 2. Install Dependencies
+It is highly recommended to use a virtual environment:
 ```bash
 python -m venv venv
-# Για Windows:
+# On Windows:
 venv\Scripts\activate
-# Για Mac/Linux:
+# On Mac/Linux:
 source venv/bin/activate
 
 pip install -r requirements.txt
 ```
 
-### 3. Ρύθμιση API Keys
-Για να λειτουργήσει το εργαλείο δωρεάν με τα κορυφαία μοντέλα, θα χρειαστείτε ένα κλειδί από το Groq.
-1. Πάρτε ένα δωρεάν API key από το [console.groq.com](https://console.groq.com/keys)
-2. Αντιγράψτε το αρχείο `.env.example` και μετονομάστε το σε `.env`
-3. Τοποθετήστε το κλειδί σας μέσα στο `.env`:
+### 3. Setup API Keys
+RAGEval utilizes Groq for completely free, lightning-fast inference.
+1. Get your free API key at [console.groq.com](https://console.groq.com/keys).
+2. Copy the `.env.example` file and rename it to `.env`.
+3. Add your key:
 ```env
 GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxx
 ```
-*(Εναλλακτικά, μπορείτε να βάλετε το κλειδί απευθείας μέσα από το UI της εφαρμογής).*
+*(Alternatively, you can paste the key directly into the app's sidebar during runtime).*
 
-### 4. Εκτέλεση Εφαρμογής
+### 4. Run the Application
 ```bash
 streamlit run app.py
 ```
-Η εφαρμογή θα ανοίξει αυτόματα στον browser σας στη διεύθυνση `http://localhost:8501`.
+The dashboard will automatically open in your default browser at `http://localhost:8501`.
 
-## 🤝 Συνεισφορά (Contributing)
-Είστε ευπρόσδεκτοι να ανοίξετε Issues ή Pull Requests για βελτιώσεις, προσθήκη νέων metrics (π.χ. Context Precision) ή νέων Vector Databases (π.χ. ChromaDB, Qdrant).
+---
 
-## 📄 Άδεια (License)
-Διανέμεται υπό την άδεια MIT.
+## 🧠 Supported Models
+By default, the application is configured to compare:
+- `llama3-8b-8192`
+- `llama3-70b-8192`
+- `mixtral-8x7b-32768`
+- `gemma-7b-it`
+
+*Note: You can easily add more OpenAI-compatible endpoints or models in `app.py`.*
+
+## 🤝 Contributing
+Contributions are more than welcome! Whether it's adding new Ragas metrics (Context Precision, Context Recall), integrating new Vector Databases, or improving the UI. Please feel free to open an Issue or submit a Pull Request.
+
+## 📄 License
+This project is open-source and available under the MIT License.

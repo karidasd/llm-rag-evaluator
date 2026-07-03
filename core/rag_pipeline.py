@@ -28,16 +28,16 @@ class RAGPipelineManager:
         
         # Initialize Prompt Builder
         template = """
-        Απάντησε στην ερώτηση βασιζόμενος/η ΜΟΝΟ στα παρακάτω δεδομένα.
-        Αν η απάντηση δεν υπάρχει στα δεδομένα, πες "Δεν γνωρίζω".
+        Answer the question based ONLY on the following context documents.
+        If the answer is not contained in the documents, just say "I don't know".
         
-        Δεδομένα:
+        Context Documents:
         {% for document in documents %}
             {{ document.content }}
         {% endfor %}
         
-        Ερώτηση: {{question}}
-        Απάντηση:
+        Question: {{question}}
+        Answer:
         """
         self.prompt_builder = PromptBuilder(template=template)
         
