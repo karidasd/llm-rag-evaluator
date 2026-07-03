@@ -1,4 +1,7 @@
-# 🦑 RAGEval: AI Data Pipeline Evaluator
+<div align="center">
+  <img src="assets/banner.png" alt="RAGEval Banner" width="800"/>
+  <h1>RAGEval: AI Data Pipeline Evaluator</h1>
+</div>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
